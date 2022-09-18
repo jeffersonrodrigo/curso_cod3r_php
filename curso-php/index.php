@@ -259,6 +259,11 @@
                                     Foreach
                                 </a>
                             </li>
+                            <li>
+                                <a href="exercicio.php?dir=repeticao&file=foreach">
+                                    Foreach
+                                </a>
+                            </li>
                         </ul>
                 </div>
             </nav>
