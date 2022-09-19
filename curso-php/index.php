@@ -260,8 +260,28 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="exercicio.php?dir=repeticao&file=foreach">
-                                    Foreach
+                                <a href="exercicio.php?dir=repeticao&file=break_continue">
+                                    Break/Continue
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=repeticao&file=desafio_impressao">
+                                    Desafio Impressão
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=repeticao&file=while">
+                                    While/Do while
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=repeticao&file=desafio_tabela">
+                                    Desafio Tabela #01
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=repeticao&file=desafio_tabela_2">
+                                    Desafio Tabela #02
                                 </a>
                             </li>
                         </ul>
