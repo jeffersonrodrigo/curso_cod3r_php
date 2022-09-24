@@ -352,7 +352,7 @@
                         </ul>
                 </div>
                 <div class="modulo azul-escuro">
-                    <h3>Paradigma Orientado a Obejto (POO)</h3>
+                    <h3>Paradigma Orientado a Objeto (POO)</h3>
                         <ul>
                             <li>
                                 <a href="exercicio.php?dir=classes_objetos&file=classe">
@@ -377,6 +377,51 @@
                             <li>
                                 <a href="exercicio.php?dir=classes_objetos&file=visibilidade">
                                     Visibilidade
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=static">
+                                    Membros Estáticos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=interface">
+                                    Interface
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=abstract">
+                                    Classe Abstrata
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=desafio_erros">
+                                    Desafio Erros
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=final">
+                                    Modificador Final
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=traits_01">
+                                    Traits #01
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=traits_02">
+                                    Traits #02
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=metodos_magicos">
+                                    Métodos Mágicos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="exercicio.php?dir=classes_objetos&file=polimorfismo">
+                                    Polimorfismo
                                 </a>
                             </li>
                         </ul>
