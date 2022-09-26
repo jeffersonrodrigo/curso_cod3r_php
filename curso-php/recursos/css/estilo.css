@@ -3,17 +3,18 @@
     box-sizing: border-box;
 }
 
-
 body {
     height: 100vh;
     margin: 0px;
     display: grid;
-    grid-template-rows: 120px 1fr 60px; /* Nesse caso está dividindo em 3 linhas sendo q a primeira vai ocupar 120 px, a segunda um fragmento completo entre a primeira e a terceira e a terceira linha 60px*/
+    grid-template-rows: 120px 60px 1fr 60px; 
     grid-template-columns: 1fr;
     grid-template-areas: 
-        "cabecalho"
-        "principal"
-        "rodape";
+        "cabecalho" 
+        "navegacao" 
+        "principal" 
+        "rodape";     
+        /* Nesse caso está dividindo em 3 linhas sendo q a primeira vai ocupar 120 px, a segunda um fragmento completo entre a primeira e a terceira e a terceira linha 60px*/       
 }
 
 .cabecalho {
@@ -43,7 +44,7 @@ body {
 
 .principal {
     grid-area: principal;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 240px);
     background-color: #f0f0f0;
     padding: 20px;
 }
@@ -54,7 +55,7 @@ body {
     overflow-y: scroll; /* Se o conteúdo que colocar nessa área for maior que a div ele vai colocar um scroll*/
     background-color: #fff;
     padding: 20px;
-    box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.2);
 }
 
 .rodape {
@@ -138,10 +139,43 @@ body {
 .modulo.roxo-escuro { border: 2px solid #4A148C; }
 .modulo.roxo-escuro > h3 { background-color: #4A148C; }
 
+.modulo.laranja-escuro { border: 2px solid #E65527; }
+.modulo.laranja-escuro > h3 { background-color: #E65527; } 
+/* Ao referenciar nova cor atualizar a pagina com shiift + f5 pois pode estar acessando css em cache */
 p.divisao {
     margin-bottom: 0px;
     font-weight: bold;
 }
 hr {
     margin-top: 0px;
+}
+
+.navegacao {
+    grid-area: navegacao;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #555;
+}
+
+.navegacao > a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.3rem;
+    background-color: rgb(33, 150, 243);
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.navegacao > a.verde { background-color: #4CAF50; }
+.navegacao > a.vermelho { background-color: #F44336; }
+
+span.usuario {
+    flex-grow: 1;
+    justify-self: flex-start;
+    color: #EEE;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    font-weight: 300;
 }
