@@ -499,4 +499,89 @@
                 </li>
             </ul>
     </div>
+    <div class="modulo azul">
+        <h3>API</h3>
+            <ul>
+                <li>
+                    <a href="exercicio.php?dir=api&file=datas_01">
+                        Data #01
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=api&file=datas_02">
+                        Data #02
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=api&file=escrever_arquivo">
+                        Escrever Arquivo
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=api&file=ler_arquivo">
+                        Ler Arquivo
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=api&file=upload">
+                        Upload
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=api&file=download">
+                        Download
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=api&file=imagens">
+                        Imagens
+                    </a>
+                </li>
+            </ul>
+    </div>
+    <div class="modulo roxo">
+        <h3>Formulário</h3>
+            <ul>
+                <li>
+                    <a href="exercicio.php?dir=formulario&file=formulario">
+                        Formulário
+                    </a>
+                </li>
+            </ul>
+    </div>
+    <div class="modulo laranja">
+        <h3>Banco de dados</h3>
+            <ul>
+                <li>
+                    <a href="exercicio.php?dir=db&file=criar_banco">
+                        Criar Banco
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=db&file=criar_tabela">
+                        Criar Tabela
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=db&file=inserir_1">
+                        Inserir Registro #01
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=db&file=consultar">
+                        Consultar Registros
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=db&file=excluir_1">
+                        Excluir Registro #01
+                    </a>
+                </li>
+                <li>
+                    <a href="exercicio.php?dir=db&file=excluir_2">
+                        Excluir Registro #02
+                    </a>
+                </li>
+            </ul>
+    </div>
 </nav>
