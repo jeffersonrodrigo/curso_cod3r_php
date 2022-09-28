@@ -20,8 +20,6 @@ if($resultado->num_rows > 0) {
     echo "Erro: " . $conexao->error;
 }
 
-// print_r($registros);
-
 $conexao->close();
 ?>
 
@@ -38,7 +36,9 @@ $conexao->close();
                 <td><?= $registro['id'] ?></td>
                 <td><?= $registro['nome'] ?></td>
                 <td>
-                    <?= date('d/m/Y', strtotime($registro['nascimento'])) ?>
+                    <?=
+                        date('d/m/Y', strtotime($registro['nascimento']))
+                    ?>
                 </td>
                 <td><?= $registro['email'] ?></td>
             </tr>
@@ -48,6 +48,6 @@ $conexao->close();
 
 <style>
     table > * {
-        font-size:1.2rem;
+        font-size: 1.2rem;
     }
 </style>
