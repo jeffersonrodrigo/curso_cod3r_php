@@ -1,5 +1,5 @@
-<?php
-class User extends Model {
+<?php // associação direta com o banco de dados
+class User extends Model { // classe usuaria é classe herdeira da classe model
     protected static $tableName = 'users';
     protected static $columns = [
         'id',

@@ -25,13 +25,14 @@ class Model {
         $this->values[$key] = $value;
     }
 
-    public static function getOne($filters = [], $columns = '*') {
-        $class = get_called_class();        
+    public static function getOne($filters = [], $columns = '*') {//pega apenas um único registro
+        $class = get_called_class();// atribuindo a função a variavel $class # a função diz qual classe que esta a chamando no momento
         $result = static::getResultSetFromSelect($filters, $columns);
         
-        return $result ? new $class($result->fetch_assoc()) : null;
+        return $result ? new $class($result->fetch_assoc()) : null; // se estiver setado vai instanciar passando uma classe(new $class($result->fetch_assoc())) caso contrario vai retornar nulo
     }
-    public static function get($filters = [], $columns = '*') {
+
+    public static function get($filters = [], $columns = '*') { // funcionalidade que pega varios registros e gera objetos através das linhas
         $objects = [];
         $result = static::getResultSetFromSelect($filters, $columns);
         if($result) {
@@ -53,6 +54,17 @@ class Model {
         } else {
             return $result;
         }
+    }
+
+    public function save() { // gerar de forma automática o comando para inserir no banco de dados um determinado modelo
+        $sql = "INSERT INTO " . static::$tableName . " ("
+            . implode(",", static::$columns) . ") VALUES (";
+        foreach(static::$columns as $col) {
+            $sql .= static::getFormatedValue($this->$col) . ",";
+        }
+        $sql[strlen($sql) - 1] = ')';
+        $id = Database::executeSQL($sql);
+        $this->id = $id;
     }
 
     private static function getFilters($filters) {
