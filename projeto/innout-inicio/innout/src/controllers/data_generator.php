@@ -1,8 +1,10 @@
 <?php
-loadModel('WorkginHours');
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+loadModel('WorkingHours');
 
 Database::executeSQL('DELETE FROM working_hours');
-Database::executeSQL('DELETE FROM users WHERE id> 5');
+Database::executeSQL('DELETE FROM users WHERE id > 5');
 
 function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
     $regularDayTemplate = [
@@ -38,11 +40,30 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
         return $lazyDayTemplate;
     }
 }
-
-function populationWorkingHours($userId, $initialDate, $regularRate, $extraRate, $lazyRate) {//função para popular as tabelas
+//função para popular as tabelas
+function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $lazyRate) {
     $currentDate = $initialDate;
-    $today = new DateTime();
-    $columns = ['user_id' => $userId,]
+    $yesterday = new DateTime();
+    $yesterday->modify('-1 day');
+    $columns = ['user_id' => $userId, 'work_date' => $currentDate];
+
+    while(isBefore($currentDate, $yesterday)) {
+        // só entra no laço se a data for anterior a data de hoje
+        if(!isWeekend($currentDate)) {
+            // só entra se não é final de semana (ou seja, apenas dias útéis)
+            $template = getDayTemplateByOdds($regularRate, $extraRate, $lazyRate);
+            $columns = array_merge($columns, $template);
+            $workingHours = new WorkingHours($columns);
+            $workingHours->insert();
+        }
+        $currentDate = getNextDay($currentDate)->format('Y-m-d');
+        $columns['work_date'] = $currentDate;
+    }
 }
 
-echo 'Tudo certo :)'
+$lastMonth = strtotime('first day of last month');
+populateWorkingHours(1, date('Y-m-1'), 70, 20, 10);
+populateWorkingHours(3, date('Y-m-d', $lastMonth), 20, 75, 5);
+populateWorkingHours(4, date('Y-m-d', $lastMonth), 20, 10, 70);
+
+echo 'Tudo certo :)';
