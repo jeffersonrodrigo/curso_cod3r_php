@@ -7,6 +7,16 @@ loadModel('WorkingHours');//carrega a classe
 $user = $_SESSION['user'];//pega o usuario da sessao e joga na variavel user
 $records = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
 
-$currentTime = strftime('%H:%M:%S', time());//pegar hora atual
-$records->innout($currentTime);
+try {
+    $currentTime = strftime('%H:%M:%S', time());//pegar hora atual
+
+    if($_POST['forcedTime']) {
+        $currentTime = $_POST['forcedTime'];
+    }
+    $records->innout($currentTime);
+    addSuccessMsg('Ponto inserido com sucesso!');
+} catch(AppException $e) {
+    addErrorMsg($e->getMessage());
+}
+
 header('Location: day_records.php');

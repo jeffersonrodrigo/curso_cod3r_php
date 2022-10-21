@@ -1,8 +1,11 @@
 <?php // nesse arquivo estará as lógicas para imprimir as mensagens
-
 $errors = [];
 
-if($exception) { // se chegar nesse arquivo uma exceção vamos querer gerar uma mensagem q será um array associativo
+
+if(isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']);
+} elseif($exception) { // se chegar nesse arquivo uma exceção vamos querer gerar uma mensagem q será um array associativo
     $message = [
         'type' => 'error', // definindo o tipo da exceção
         'message' => $exception->getMessage() // e a mensagem passada pela exceção
@@ -15,7 +18,7 @@ if($exception) { // se chegar nesse arquivo uma exceção vamos querer gerar uma
 
 $alertType = '';
 
-if($message['type'] === 'error') {//caso seja pego o typo igual a erro vai atribuir danger a alertType caso contrario vai ser o sucess
+if($message['type'] === 'error') {//caso seja pego o typo igual a erro vai atribuir danger a alertType caso contrario vai ser o success
     $alertType = 'danger';
 } else {
     $alertType = 'success';
