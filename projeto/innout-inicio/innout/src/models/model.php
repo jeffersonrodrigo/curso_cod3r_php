@@ -95,7 +95,11 @@ class Model {
             // expressao verdadeira q nao afetara nada mas fara com que quaquer outra condição ou elemento que for passado 
             //e for pecorrer aqui no foreach saberemos que antes dele vai ter um and
             foreach($filters as $column => $value) {
-            $sql .= " AND ${column} = " . static::getFormatedValue($value);
+                if($column == 'raw') {
+                    $sql .= " AND {$value}";
+                } else {
+                    $sql .= " AND ${column} = " . static::getFormatedValue($value);
+                }
             }
         }
         return $sql;

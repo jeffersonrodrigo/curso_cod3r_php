@@ -1,7 +1,6 @@
 <?php
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
-loadModel('WorkingHours');
 
 Database::executeSQL('DELETE FROM working_hours');
 Database::executeSQL('DELETE FROM users WHERE id > 5');

@@ -61,8 +61,8 @@ class WorkingHours extends Model {
             throw new AppException("Você já fez os 4 batimentos do dia!");
             // lançando a classe de exceção criada em /exceptions/AppException.php
         }
-        $this->$timeColumn = $time;
-        //$this->$timeColumn quer dizer que quer pegar o atributo chamado timeColumn dentro do objeto atual(WorkingHours) e como queremos pegar o nome das colunas e podem variar por isso nesse caso tem q deixar o $ para dizer q esse valor altera
+        $this->$timeColumn = $time;//$this->$timeColumn quer dizer que quer pegar o atributo chamado timeColumn dentro do objeto atual(WorkingHours) e como queremos pegar o nome das colunas e podem variar por isso nesse caso tem q deixar o $ para dizer q esse valor altera
+        $this->worked_time = getSecondsFromDateinterval($this->getWorkedInterval());
         if($this->id) {
             //caso ja tenha algum valor ele só ira atualizar as proximas colunas(time2, 3, 4..)
             $this->update();
@@ -116,6 +116,30 @@ class WorkingHours extends Model {
             $total = sumIntervals($workday, $this->getLunchInterval());
             return $t1->add($total);
         }
+    }
+
+    public static function getMonthlyReport($userId, $date) {
+        //metodo pegar relatorio do mes
+        $registries = [];
+        // é nessa variavel que vamos inserir os registros obtidos no banco de dados através da consulta
+        $startDate = getFirstDayOfMonth($date)->format('Y-m-d');
+        $endDate = getLastDayOfMonth($date)->format('Y-m-d');
+
+        $result = static::getResultSetFromSelect([
+            //criado linha 51 em src\models\Model.php
+            'user_id' => $userId,
+            'raw' => "work_date between '{$startDate}' AND '{$endDate}'"
+             //trecho "cru" de SQL para fazer consulta
+        ]);
+
+        if($result) {
+            //se o result estiver setado vai entrar aqui e fazer um laço para pegar cada um dos resultados e colocar dentro de $registries
+            while($row = $result->fetch_assoc()) {
+                $registries[$row['work_date']] = new WorkingHours($row);
+            }
+        }
+
+        return $registries;
     }
     
     private function getTimes() {
