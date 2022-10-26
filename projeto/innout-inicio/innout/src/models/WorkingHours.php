@@ -118,6 +118,16 @@ class WorkingHours extends Model {
         }
     }
 
+    function getBalance() {
+        if(!$this->time1 && !isPastWorkday($this->work_date)) return '';//se o time1 nao estiver setado e nem for um dia de trabalho válido, nao vou pegar osaldo daquele dia e vai retornar vazio
+        if($this->worked_time == DAILY_TIME) return '-';
+
+        $balance = $this->worked_time - DAILY_TIME;
+        $balanceString = getTimeStringFromSeconds(abs($balance));
+        $sign = $this->worked_time >= DAILY_TIME ? '+' : '-';
+        return "{$sign}{$balanceString}";
+    }
+
     public static function getMonthlyReport($userId, $date) {
         //metodo pegar relatorio do mes
         $registries = [];

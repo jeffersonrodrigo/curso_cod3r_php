@@ -49,29 +49,40 @@ function getDateFromString($str) {
     return DateTimeImmutable::createFromFormat('H:i:s', $str);
 }
 
-function getFirstDayOfMonth($date) {//primeiro dia do mes
+function getFirstDayOfMonth($date) {
+    //primeiro dia do mes
     $time = getDateAsDateTime($date)->getTimestamp();
-    return date('Y-m-1', $time);
+    return new DateTime(date('Y-m-1', $time));
 }
 
-function getLastDayOfMonth($date) {//ultimo dia do mes
+function getLastDayOfMonth($date) {
+    //ultimo dia do mes
     $time = getDateAsDateTime($date)->getTimestamp();
-    return date('Y-m-t', $time);
+    return new DateTime(date('Y-m-t', $time));
 }
 
-function getSecondsFromDateinterval($interval) {
-    $d1 = new DateTimeImmutable;
+function getSecondsFromDateInterval($interval) {
+    $d1 = new DateTimeImmutable();
     $d2 = $d1->add($interval);
     return $d2->getTimestamp() - $d1->getTimestamp();
 }
 
 function isPastWorkday($date) {
+    //função que diz se é um dia válido de trabalho que já passou = retorna verdadeiro ou falso
     return !isWeekend($date) && isBefore($date, new DateTime());
+    //isWeekend função criada linha 8 e isBefore linha 15
 }
 
 function getTimeStringFromSeconds($seconds) {
+    //pegar os segundos e transformar formato h m s//$report = data que passamos como parametro para essa view, e pegar cada um dos registros dentro do relatório para preencher as informações
     $h = intdiv($seconds, 3600);
     $m = intdiv($seconds % 3600, 60);
     $s = $seconds - ($h * 3600) - ($m * 60);
     return sprintf('%02d:%02d:%02d', $h, $m, $s);
+}
+
+function formatDateWithLocale($date, $pattern) {
+     //$pattern = padronizar
+    $time = getDateAsDateTime($date)->getTimestamp();
+    return strftime($pattern, $time);
 }
