@@ -61,8 +61,9 @@ class WorkingHours extends Model {
             throw new AppException("Você já fez os 4 batimentos do dia!");
             // lançando a classe de exceção criada em /exceptions/AppException.php
         }
-        $this->$timeColumn = $time;//$this->$timeColumn quer dizer que quer pegar o atributo chamado timeColumn dentro do objeto atual(WorkingHours) e como queremos pegar o nome das colunas e podem variar por isso nesse caso tem q deixar o $ para dizer q esse valor altera
-        $this->worked_time = getSecondsFromDateinterval($this->getWorkedInterval());
+        $this->$timeColumn = $time;
+        //$this->$timeColumn quer dizer que quer pegar o atributo chamado timeColumn dentro do objeto atual(WorkingHours) e como queremos pegar o nome das colunas e podem variar por isso nesse caso tem q deixar o $ para dizer q esse valor altera
+        $this->worked_time = getSecondsFromDateInterval($this->getWorkedInterval());
         if($this->id) {
             //caso ja tenha algum valor ele só ira atualizar as proximas colunas(time2, 3, 4..)
             $this->update();
@@ -119,13 +120,45 @@ class WorkingHours extends Model {
     }
 
     function getBalance() {
-        if(!$this->time1 && !isPastWorkday($this->work_date)) return '';//se o time1 nao estiver setado e nem for um dia de trabalho válido, nao vou pegar osaldo daquele dia e vai retornar vazio
+        if(!$this->time1 && !isPastWorkday($this->work_date)) return '';
+        //se o time1 nao estiver setado e nem for um dia de trabalho válido, nao vou pegar osaldo daquele dia e vai retornar vazio
         if($this->worked_time == DAILY_TIME) return '-';
 
         $balance = $this->worked_time - DAILY_TIME;
         $balanceString = getTimeStringFromSeconds(abs($balance));
         $sign = $this->worked_time >= DAILY_TIME ? '+' : '-';
         return "{$sign}{$balanceString}";
+    }
+
+    public static function getAbsentUsers() {
+        $today = new DateTime();
+        $result = Database::getResultFromQuery("
+            SELECT name FROM users
+            WHERE end_date is NULL
+            AND id NOT IN (
+                SELECT user_id FROM working_hours
+                WHERE work_date = '{$today->format('Y-m-d')}'
+                AND time1 IS NOT NULL
+            )
+        ");
+
+        $absentUsers = [];
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                array_push($absentUsers, $row['name']);
+            }
+        }
+
+        return $absentUsers;
+    }
+    
+    public static function getWorkedTimeInMonth($yearAndMonth) {
+        $startDate = (new DateTime("{$yearAndMonth}-1"))->format('Y-m-d');
+        $endDate = getLastDayOfMonth($yearAndMonth)->format('Y-m-d');
+        $result = static::getResultSetFromSelect([
+            'raw' => "work_date BETWEEN '{$startDate}' AND '{$endDate}'"
+        ], "sum(worked_time) as sum");
+        return $result->fetch_assoc()['sum'];
     }
 
     public static function getMonthlyReport($userId, $date) {
