@@ -6,6 +6,29 @@
     <title>Unidades #01</title>
     <style>
         /* ... */
+        .unidades-absolutas {
+            position: absolute; /* nao tem relação com o fato de estar usando unidades absolutas */
+            font-size: 40px;
+            padding: 20px;
+            border: solid 5px #222;
+            margin: 30px;
+            width: 4cm; /* pouco usado */
+            height: 20mm; /* pouco usado */
+            top: 150px;
+            left: 200px;
+        }
+
+        .unidades-relativas {
+            position: absolute;
+            font-size: 4em; /* possibilita um site mais acessivel pois o tamanho da fonte muda de acordo com as configurações do browser */
+            padding: 5%;
+            border: solid 1vw #222;
+            margin: .8%;
+            width: 20vw; /* vw → pega a largura do viewport e divide por 100 → 1vh = 1/100 da largura da viewport */
+            height: 15vh; /* vh → pega a altura do viewport e divide por 100 → 1vh = 1/100 da altura da viewport */
+            bottom: 5%;
+            right: 5%;
+        }
     </style>
 </head>
 

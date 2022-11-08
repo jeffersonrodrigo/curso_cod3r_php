@@ -5,12 +5,39 @@
     <meta charset="UTF-8">
     <title>Anatomia CSS</title>
     <style>
-        /* ... */
+        .seletor {
+            color: #fff;
+            font-size: 30px;
+            text-align: center;
+            /* multiplos valores */
+            border: solid 5px navy;
+            font-family: helvetica, sans-serif; /* possibilidade de alternancia */
+            /* funções do css */
+            width: calc(100% - 40px);
+            background-color: rgb(34, 153, 189);
+        }
+
+        /* Usando pseudo-classe
+        https://www.w3schools.com/css/css_pseudo_classes.asp */
+        .seletor:hover {
+            background-color: orangered;
+            /* Outros Exemplos
+            Link não visitado - a:link 
+            Link visitado - a:visited
+            link selecionado - a:active*/
+        }
+
+        /* Pseudo-elementos
+        https://www.w3schools.com/css/css_pseudo_elements.asp */
+        .seletor::first-letter {
+            font-size: 60px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
-    <div class="selector">Conteúdo</div>
+    <div class="seletor">Conteúdo</div>
 </body>
-
+<script src="js/tag.js"></script>
 </html>

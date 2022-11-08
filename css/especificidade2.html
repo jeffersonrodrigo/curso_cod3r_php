@@ -6,11 +6,21 @@
     <title>Especificidade CSS</title>
     <style>
         /* https://specificity.keegan.st/ */
+
+        body { font-size: 40px;} /* 1 ponto*/
+
+        div { background-color: #00b; color: #fff;} /* 1 ponto*/
+        div[wm-cor] { background-color: darkorange;} /* 11 pontos*/
+        div:hover { background-color: purple;} /* 11 pontos*/
+        div.estilo { background-color: green;} /* 11 pontos*/
+        #unico1, #unico2 { background-color: #000;} /* 200 pontos*/
+        div:hover, #unico:hover { background-color: purple;} /* 121 pontos*/
     </style>
 </head>
 
 <body>
-    <div id="unico1" class="estilo">
+    <div id="unico1" class="estilo" style="background-color: red;">
+        <!-- estilo inline supera os outros -->
         #unico1 vs .estilo vs inline
     </div>
     <div id="unico2" class="estilo">#unico2 vs .estilo</div>
