@@ -9,9 +9,19 @@
 
 <body class="conteudo exercicio">
     <div>
-        <a href="https://google.com.br">Google</a>
+        <a href="https://google.com.br" onclick="navegarEm5s(event)">
+            <!-- Forma de chamar o evento(função JS) tem q especificar q é um event(escrito assim msm) -->
+            Google</a>
     </div>
     <script>
-        // ...
+        function navegarEm5s(e) {
+            //o e representa evento 
+            e.preventDefault()
+            console.log('Saindo em 5s...')
+            setTimeout(() => {
+                const link = e.target
+                window.location.href = link.href
+            }, 5000) //5000 é em milisegundos o que representa 5 segundos
+        }
     </script>
 </body>
